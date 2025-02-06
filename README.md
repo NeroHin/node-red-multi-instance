@@ -2,6 +2,9 @@
 
 一個用於管理多個 Node-RED 實例的網頁應用程式，提供簡單直觀的介面來建立、管理和監控多個 Node-RED 實例。
 
+![](./public/CleanShot%202025-02-07%20at%2001.38.30.png)
+![](./public/CleanShot%202025-02-07%20at%2001.38.38.png)
+
 ## 功能特色
 
 - 🚀 快速建立和管理多個 Node-RED 實例
@@ -118,11 +121,11 @@ node-red-workspace/
 - `NODE_ENV` - 執行環境
 
 ### 前端
-- `VITE_API_URL` - API 基礎網址
+- `VITE_API_URL` - API Endpoint
 
 ## 打包部署
 
-1. 建立前端產品版本
+1. 前端打包
 ```bash
 cd frontend
 npm run build
