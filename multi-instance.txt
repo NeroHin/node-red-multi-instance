@@ -1,0 +1,208 @@
+[Node-RED](https://discourse.nodered.org/)
+
+[Skip to main content](https://discourse.nodered.org/t/multiple-node-red-instances/18002/7#main-container)
+
+# [Multiple node red instances](https://discourse.nodered.org/t/multiple-node-red-instances/18002)
+
+[General](https://discourse.nodered.org/c/general/7)
+
+You have selected **0** posts.
+
+[select all](https://discourse.nodered.org/t/multiple-node-red-instances/18002/7)
+
+[cancel selecting](https://discourse.nodered.org/t/multiple-node-red-instances/18002/7)
+
+3.5k
+views
+20
+likes
+2
+links
+
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/kuema/48/6542_2.png)3](https://discourse.nodered.org/u/kuema "kuema")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/hominidae/48/4174_2.png)](https://discourse.nodered.org/u/hominidae "hominidae")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/totallyinformation/48/31_2.png)](https://discourse.nodered.org/u/TotallyInformation "TotallyInformation")
+
+[![](https://avatars.discourse-cdn.com/v4/letter/m/2acd7d/48.png)](https://discourse.nodered.org/u/Meng "Meng")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/dceejay/48/38_2.png)](https://discourse.nodered.org/u/dceejay "dceejay")
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/1 "Jump to the first post")
+
+7 / 7
+
+
+Nov 2019
+
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/7)
+
+[![](https://avatars.discourse-cdn.com/v4/letter/m/2acd7d/48.png)](https://discourse.nodered.org/u/Meng)
+
+[Meng](https://discourse.nodered.org/u/Meng)
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002 "Post date")
+
+What is the best way to run multiple node-red instances? As far as i can find a different port is needed for every instance. Is sharing the setting.js file and or node\_modules a good option? Or is it advised to make multiple folders?
+
+For now i am using: node-red -p 1881 -u C:\\Users\\xx.node-red test.json and node-red -p 1881 -u C:\\Users\\xxx\\Test2
+
+3.5k
+views
+20
+likes
+2
+links
+
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/kuema/48/6542_2.png)3](https://discourse.nodered.org/u/kuema "kuema")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/hominidae/48/4174_2.png)](https://discourse.nodered.org/u/hominidae "hominidae")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/totallyinformation/48/31_2.png)](https://discourse.nodered.org/u/TotallyInformation "TotallyInformation")
+
+[![](https://avatars.discourse-cdn.com/v4/letter/m/2acd7d/48.png)](https://discourse.nodered.org/u/Meng "Meng")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/dceejay/48/38_2.png)](https://discourse.nodered.org/u/dceejay "dceejay")
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/kuema/48/6542_2.png)](https://discourse.nodered.org/u/kuema)
+
+[kuema](https://discourse.nodered.org/u/kuema)Regular
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/2 "Post date")
+
+It depends on your use case.
+
+In my setups I am using one Node-RED installation and launch different workspaces with `-u`, each with their own dependencies, settings.js, flows.json and so on.
+
+Structured like this:
+
+```hljs java
+
+.
+├── apps
+│   ├── node-red -> node-red_1.0
+│   ├── node-red_0.19
+│   ├── node-red_0.20
+│   └── node-red_1.0
+└── workspaces
+    ├── node-red-controller
+    │   ├── flows_cred.json
+    │   ├── flows.json
+    │   ├── lib
+    │   ├── node_modules
+    │   ├── package.json
+    │   ├── package-lock.json
+    │   └── settings.js
+    ├── node-red-dashboard
+    │   ├── flows_cred.json
+    │   ├── flows.json
+    │   ├── lib
+    │   ├── node_modules
+    │   ├── package.json
+    │   ├── package-lock.json
+    │   ├── settings.js
+    │   └── static
+    ├── node-red-telegram
+    │   ├── flows_cred.json
+    │   ├── flows.json
+    │   ├── lib
+    │   ├── node_modules
+    │   ├── package.json
+    │   ├── package-lock.json
+    │   └── settings.js
+    └── node-red-test
+        ├── flows_cred.json
+        ├── flows.json
+        ├── lib
+        ├── package.json
+        └── settings.js
+
+```
+
+Everything is managed with a PM2 ecosystem file.
+
+After all it's not very different from your approach.
+
+- [Best practice for installation of node-red and custom node](https://discourse.nodered.org/t/best-practice-for-installation-of-node-red-and-custom-node/22850/2)
+- [Windows - Settings.js](https://discourse.nodered.org/t/windows-settings-js/22256/3)
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/totallyinformation/48/31_2.png)](https://discourse.nodered.org/u/TotallyInformation)
+
+[TotallyInformation](https://discourse.nodered.org/u/TotallyInformation)Regular
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/3 "Post date")
+
+In my own case, I use my alternate installer so that each instance is self-contained & I don't have to mess with the package.json because it contains the startup scripts ( `npm start`), the script doesn't need to change because the userDir for each instance is in the `data` subfolder.
+
+As with Matthias's example, the advantage is that you can run each instance with a different version of Node-RED if you like. You could also adapt the start script to run a custom version of node.js if you needed to.
+
+By the way [@kuema](https://discourse.nodered.org/u/kuema), are you trying to copy my picture?! I've only just noticed that you also have an archery image but facing in the other direction ![:smiley:](https://emoji.discourse-cdn.com/twitter/smiley.png?v=9)
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/dceejay/48/38_2.png)](https://discourse.nodered.org/u/dceejay)
+
+[dceejay](https://discourse.nodered.org/u/dceejay)Leader
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/4 "Post date")
+
+Looks like a standoff when you two guys get chatting...
+
+![image](https://us1.discourse-cdn.com/flex016/uploads/nodered/original/2X/7/78add04087a2293fd115a71d965f1971b5513e5c.jpeg)
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/kuema/48/6542_2.png)](https://discourse.nodered.org/u/kuema)
+
+[kuema](https://discourse.nodered.org/u/kuema)Regular
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/5 "Post date")
+
+Julian ( [@TotallyInformation](https://discourse.nodered.org/u/totallyinformation)), I have been using that picture for a while now, and you have noticed just now? ![:grin:](https://emoji.discourse-cdn.com/twitter/grin.png?v=12) But in fact, that was not intentional. I used it as my Github avatar, so it got moved over here when I signed up at the forum. The difference is, I'm a lefty. ![:nerd_face:](https://emoji.discourse-cdn.com/twitter/nerd_face.png?v=12)
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/kuema/48/6542_2.png)](https://discourse.nodered.org/u/kuema)
+
+[kuema](https://discourse.nodered.org/u/kuema)Regular
+
+![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/dceejay/24/38_2.png)dceejay
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/6 "Post date")
+
+There have been even funnier constellations... so try not to get in between ![:see_no_evil:](https://emoji.discourse-cdn.com/twitter/see_no_evil.png?v=9)![:joy:](https://emoji.discourse-cdn.com/twitter/joy.png?v=9)
+
+![image](https://us1.discourse-cdn.com/flex016/uploads/nodered/original/2X/6/6c888057b6a923db30e74d87dffdb4c99adc8e77.png)
+
+[![](https://sea2.discourse-cdn.com/flex016/user_avatar/discourse.nodered.org/hominidae/48/4174_2.png)](https://discourse.nodered.org/u/hominidae)
+
+[hominidae](https://discourse.nodered.org/u/hominidae)
+
+[Nov 2019](https://discourse.nodered.org/t/multiple-node-red-instances/18002/7 "Post date")
+
+...FWIW, I am using node-red in a docker install.
+
+This way I can have as many instances as i want/need, each looking like a separate host install, including individual IPs .. no need for mapping ports and everything
+
+Reply
+
+### Related topics
+
+| Topic | Replies | Views | Activity |
+| --- | --- | --- | --- |
+| [Multiple instances of node-red using PM2?](https://discourse.nodered.org/t/multiple-instances-of-node-red-using-pm2/4888)<br>[General](https://discourse.nodered.org/c/general/7) | [3](https://discourse.nodered.org/t/multiple-instances-of-node-red-using-pm2/4888/1) | 3.3k | [Jun 2019](https://discourse.nodered.org/t/multiple-instances-of-node-red-using-pm2/4888/4) |
+| [Node red multiple instances](https://discourse.nodered.org/t/node-red-multiple-instances/9787)<br>[Core Development](https://discourse.nodered.org/c/development/8) | [26](https://discourse.nodered.org/t/node-red-multiple-instances/9787/1) | 22.6k | [Jan 2021](https://discourse.nodered.org/t/node-red-multiple-instances/9787/27) |
+| [Running Node-RED on multiple instances but with separate set of flow](https://discourse.nodered.org/t/running-node-red-on-multiple-instances-but-with-separate-set-of-flow/49068)<br>[General](https://discourse.nodered.org/c/general/7) | [22](https://discourse.nodered.org/t/running-node-red-on-multiple-instances-but-with-separate-set-of-flow/49068/1) | 3.4k | [Aug 2021](https://discourse.nodered.org/t/running-node-red-on-multiple-instances-but-with-separate-set-of-flow/49068/23) |
+| [Multiple NodeRed Instances on different Ports - Linux/SystemD](https://discourse.nodered.org/t/multiple-nodered-instances-on-different-ports-linux-systemd/9555)<br>[General](https://discourse.nodered.org/c/general/7) | [26](https://discourse.nodered.org/t/multiple-nodered-instances-on-different-ports-linux-systemd/9555/1) | 8.9k | [Jul 2020](https://discourse.nodered.org/t/multiple-nodered-instances-on-different-ports-linux-systemd/9555/28) |
+| [Alternate-node-red-installer](https://discourse.nodered.org/t/alternate-node-red-installer/81172)<br>[General](https://discourse.nodered.org/c/general/7) | [20](https://discourse.nodered.org/t/alternate-node-red-installer/81172/1) | 365 | [Sep 2023](https://discourse.nodered.org/t/alternate-node-red-installer/81172/22) |
+
+Topic list, column headers with buttons are sortable.
+
+[![](https://nodered.org/images/openjs_foundation-logo.svg)](https://openjsf.org/)
+
+Copyright [OpenJS Foundation](https://openjsf.org/) and Node-RED contributors. All rights reserved. The [OpenJS Foundation](https://openjsf.org/) has registered trademarks and uses trademarks. For a list of trademarks of the [OpenJS Foundation](https://openjsf.org/), please see our [Trademark Policy](https://trademark-policy.openjsf.org/) and [Trademark List](https://trademark-list.openjsf.org/). Trademarks and logos not indicated on the [list of OpenJS Foundation trademarks](https://trademark-list.openjsf.org/) are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
+
+[The OpenJS Foundation](https://openjsf.org/) \| [Terms of Use](https://terms-of-use.openjsf.org/) \| [Privacy Policy](https://privacy-policy.openjsf.org/) \| [OpenJS Foundation Bylaws](https://bylaws.openjsf.org/) \| [Trademark Policy](https://trademark-policy.openjsf.org/) \| [Trademark List](https://trademark-list.openjsf.org/) \| [Cookie Policy](https://www.linuxfoundation.org/cookies)
+
+Invalid date
+
+
+Invalid date

@@ -1,0 +1,18 @@
+node-red-workspace/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── routes/
+│   ├── package.json
+│   └── Dockerfile
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── views/
+│   │   ├── stores/
+│   │   └── router/
+│   ├── package.json
+│   └── Dockerfile
+└── docker-compose.yml 
