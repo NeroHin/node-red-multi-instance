@@ -123,20 +123,3 @@ node-red-workspace/
 ### 前端
 - `VITE_API_URL` - API Endpoint
 
-## 打包部署
-
-1. 前端打包
-```bash
-cd frontend
-npm run build
-```
-
-2. 建立 Docker 映像檔
-```bash
-docker-compose build
-```
-
-3. 部署服務
-```bash
-docker-compose up -d
-```
